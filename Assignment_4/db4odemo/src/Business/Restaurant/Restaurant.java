@@ -5,6 +5,8 @@
  */
 package Business.Restaurant;
 
+import Business.Menu.MenuDirectory;
+
 /**
  *
  * @author harold
@@ -13,7 +15,7 @@ public class Restaurant {
     
     private String restaurantName;
     private String address;
-    private String managerName;
+    private String restroManagerName;
     private String phoneNumber;
     private MenuDirectory MenuDirectory;
     private String restRating;
@@ -21,7 +23,7 @@ public class Restaurant {
     public Restaurant(String restaurantName, String address, String managerName, String phoneNumber, String restRating) {
         this.restaurantName = restaurantName;
         this.address = address;
-        this.managerName = managerName;
+        this.restroManagerName = managerName;
         this.phoneNumber = phoneNumber;
         this.restRating = restRating;
     }
@@ -52,13 +54,14 @@ public class Restaurant {
         this.address = address;
     }
 
-    public String getManagerName() {
-        return managerName;
+    public String getRestroManagerName() {
+        return restroManagerName;
     }
 
-    public void setManagerName(String managerName) {
-        this.managerName = managerName;
+    public void setRestroManagerName(String restroManagerName) {
+        this.restroManagerName = restroManagerName;
     }
+
 
     public String getPhoneNumber() {
         return phoneNumber;
