@@ -4,10 +4,15 @@
  */
 package userinterface;
 
+import Business.Customer.CustomerDirectory;
 import Business.EcoSystem;
 import Business.DB4OUtil.DB4OUtil;
+import Business.DeliveryMan.DeliveryManDirectory;
+import Business.Menu.MenuDirectory;
+import Business.Order.OrderDirectory;
 
 import Business.Organization;
+import Business.Restaurant.RestaurantDirectory;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
@@ -22,6 +27,14 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
+    
+    private UserAccount userAccount;
+    private JPanel userProcessContainer;
+    private CustomerDirectory customerDirectory;
+    private RestaurantDirectory restaurantDirectory;
+    private DeliveryManDirectory deliveryManDirectory;
+    private MenuDirectory menuDirectory;
+    private OrderDirectory orderDirectory;
     private EcoSystem system;
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
 
@@ -29,6 +42,12 @@ public class MainJFrame extends javax.swing.JFrame {
         initComponents();
         system = dB4OUtil.retrieveSystem();
         this.setSize(1680, 1050);
+        customerDirectory = new CustomerDirectory();
+        restaurantDirectory = new RestaurantDirectory();
+        deliveryManDirectory = new DeliveryManDirectory();
+        menuDirectory = new MenuDirectory();
+        orderDirectory = new OrderDirectory();
+
     }
 
     /**
@@ -123,7 +142,27 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void loginJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginJButtonActionPerformed
         // Get user name
-       
+       if(userNameJTextField.getText().isEmpty() || passwordField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Username and Password field's cannot be empty");
+            return;
+        }
+        
+        else if(system.getUserAccountDirectory().authenticateUser(userNameJTextField.getText(), passwordField.getText()) == null) {
+            JOptionPane.showMessageDialog(null,"Invalid UserName");
+            return;
+        }
+        
+        
+        UserAccount userAccount = system.getUserAccountDirectory().authenticateUser(userNameJTextField.getText(), passwordField.getText());
+        
+        System.out.println("EcoSYSTEM MAIN" + system.toString() + system.getUserAccountDirectory().getUserAccountList().size());
+        
+        CardLayout layout = (CardLayout) container.getLayout();
+        container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, system, customerDirectory, restaurantDirectory, deliveryManDirectory, menuDirectory, orderDirectory));
+        layout.next(container);
+        logoutJButton.setEnabled(true);
+        loginJButton.setEnabled(false);
+        
     }//GEN-LAST:event_loginJButtonActionPerformed
 
     private void logoutJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutJButtonActionPerformed

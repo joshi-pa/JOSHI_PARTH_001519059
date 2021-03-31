@@ -4,7 +4,12 @@
  */
 package userinterface.CustomerRole;
 
+import Business.Customer.CustomerDirectory;
+import Business.DeliveryMan.DeliveryManDirectory;
 import Business.EcoSystem;
+import Business.Menu.MenuDirectory;
+import Business.Order.OrderDirectory;
+import Business.Restaurant.RestaurantDirectory;
 
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.LabTestWorkRequest;
@@ -20,18 +25,34 @@ import javax.swing.table.DefaultTableModel;
 public class CustomerAreaJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
-
+   
     private UserAccount userAccount;
+    private UserAccount account;
+    private CustomerDirectory customerDirectory;
+    private RestaurantDirectory restaurantDirectory;
+    private DeliveryManDirectory deliveryManDirectory;
+    private MenuDirectory menuDirectory;
+    private OrderDirectory orderDirectory;
+    private static int count = 1;
+    private EcoSystem ecoSystem;
+
     /**
      * Creates new form DoctorWorkAreaJPanel
      */
-    public CustomerAreaJPanel(JPanel userProcessContainer, UserAccount account) {
+    public CustomerAreaJPanel(JPanel userProcessContainer, UserAccount account, CustomerDirectory customerDirectory ,RestaurantDirectory restaurantDirectory ,DeliveryManDirectory deliveryManDirectory ,MenuDirectory menuDirectory ,OrderDirectory orderDirectory, EcoSystem ecoSystem ) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
       
         this.userAccount = account;
-        //valueLabel.setText(enterprise.getName());
+        this.ecoSystem = ecoSystem;
+        this.orderDirectory = orderDirectory;
+        this.menuDirectory = menuDirectory;
+        this.customerDirectory = customerDirectory;
+        this.deliveryManDirectory = deliveryManDirectory;
+        this.restaurantDirectory = restaurantDirectory;
+        
+//        valueLabel.setText(enterprise.getName());
         populateRequestTable();
     }
     
@@ -105,9 +126,10 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         });
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        enterpriseLabel.setText("EnterPrise :");
+        enterpriseLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        enterpriseLabel.setText("Customer :");
 
-        valueLabel.setText("<value>");
+        valueLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -125,7 +147,7 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(refreshTestJButton)
@@ -135,11 +157,11 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(refreshTestJButton)
-                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(refreshTestJButton)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
