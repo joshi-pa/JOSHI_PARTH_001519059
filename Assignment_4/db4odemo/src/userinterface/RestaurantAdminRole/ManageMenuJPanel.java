@@ -47,9 +47,11 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
         dtm.setRowCount(0);
         for(Menu menu : menuDirectory.getMenuDirectory()){
             if(menu.getRestaurantName().equals(account.getEmployee().getName())) {
-                Object [] row = new Object[2];
+                Object [] row = new Object[4];
                 row[0] = menu;
                 row[1] = menu.getPrice();
+                row[2] = menu.getCuisine();
+                row[3] = menu.getItemType();
                 dtm.addRow(row);
             }
         }
@@ -78,22 +80,23 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         txtCuisine = new javax.swing.JTextField();
         cmbItemType = new javax.swing.JComboBox<>();
+        btnAdd1 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(255, 255, 204));
 
         tblMenu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Item Name", "Price"
+                "Item Name", "Price", "Cuisine", "Item Type"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -102,7 +105,8 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblMenu);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Manage Menu");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -126,6 +130,7 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnAdd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAdd.setText("Add Item");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,6 +138,7 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnBack.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnBack.setText("<Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,7 +158,15 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
             }
         });
 
-        cmbItemType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbItemType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Select--", "Pizza", "Burgers", "Tandoor", "Sandwich", "Desserts ", "Shakes" }));
+
+        btnAdd1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnAdd1.setText("Delete Item");
+        btnAdd1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdd1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -165,12 +179,9 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(172, 172, 172)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnBack)
-                                .addGap(84, 84, 84)
-                                .addComponent(jLabel1))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 605, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(btnAdd1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(355, 355, 355)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,18 +201,27 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
                                     .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtItemName, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtCuisine, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cmbItemType, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(227, Short.MAX_VALUE))
+                                    .addComponent(cmbItemType, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(btnBack)))
+                .addContainerGap(46, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(btnBack))
-                .addGap(42, 42, 42)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1)
+                .addGap(26, 26, 26)
+                .addComponent(btnBack)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(btnAdd1)))
                 .addGap(36, 36, 36)
                 .addComponent(jLabel2)
                 .addGap(36, 36, 36)
@@ -222,7 +242,7 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
                     .addComponent(cmbItemType, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnAdd)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -257,6 +277,10 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
         
         menuDirectory.newItem(itemName, price, res, cui, itemType);
         populateTable();
+        txtItemName.setText(" ");
+        txtPrice.setText(" ");
+        txtCuisine.setText(" ");
+        cmbItemType.setSelectedItem("--Select--");
         
     }//GEN-LAST:event_btnAddActionPerformed
 
@@ -271,9 +295,23 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCuisineActionPerformed
 
+    private void btnAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd1ActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblMenu.getSelectedRow();
+        if(selectedRow < 0) {
+            JOptionPane.showMessageDialog(null,"Please select an item to be deleted", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        Menu menu = (Menu) tblMenu.getValueAt(selectedRow, 0);
+        menuDirectory.removeMenu(menu);
+        populateTable();
+    }//GEN-LAST:event_btnAdd1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnAdd1;
     private javax.swing.JButton btnBack;
     private javax.swing.JComboBox<String> cmbItemType;
     private javax.swing.JLabel jLabel1;

@@ -52,8 +52,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         
        // Add the code for draw your system structure shown by JTree
        
-        
-        DefaultMutableTreeNode networks=new DefaultMutableTreeNode("SystemAdmin");
+//        
+        DefaultMutableTreeNode networks=new DefaultMutableTreeNode("Manage Users");
         DefaultMutableTreeNode root=(DefaultMutableTreeNode)model.getRoot();
         root.removeAllChildren();
         root.insert(networks, 0);
@@ -67,9 +67,9 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         DeliveryMan deliveryMan;
         Restaurant restaurant;
         
-        DefaultMutableTreeNode customerListNode = new DefaultMutableTreeNode("Customer");
-        DefaultMutableTreeNode deliveryManListNode  = new DefaultMutableTreeNode("Delivery");
-        DefaultMutableTreeNode restaurantListNode = new DefaultMutableTreeNode("Restaurant");
+        DefaultMutableTreeNode customerListNode = new DefaultMutableTreeNode("Customers");
+        DefaultMutableTreeNode deliveryManListNode  = new DefaultMutableTreeNode("Delivery Executives");
+        DefaultMutableTreeNode restaurantListNode = new DefaultMutableTreeNode("Restaurantssysadminsysadmin");
         networks.insert(customerListNode, 0);
         networks.insert(deliveryManListNode, 1);
         networks.insert(restaurantListNode, 2);
@@ -120,6 +120,10 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         setLayout(new java.awt.BorderLayout());
 
+        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Admin");
+        jTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jTree.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
             public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
                 jTreeValueChanged(evt);
@@ -132,8 +136,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,10 +148,13 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jSplitPane.setLeftComponent(jPanel1);
 
-        jLabel1.setText("Selected Node:");
+        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
+
+        jLabel1.setText("Displaying :");
 
         lblSelectedNode.setText("<View_selected_node>");
 
+        btnCustomer.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnCustomer.setText("Manage All Customers");
         btnCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,6 +162,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnRestaurant.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnRestaurant.setText("Manage Restaurants");
         btnRestaurant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,7 +170,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnDelivery.setText("Manage Deliveryman");
+        btnDelivery.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnDelivery.setText("Manage Delivery Executives");
         btnDelivery.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeliveryActionPerformed(evt);
@@ -182,12 +191,11 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                         .addComponent(lblSelectedNode))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(91, 91, 91)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnDelivery)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(btnRestaurant, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(240, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnRestaurant, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDelivery, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(217, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,7 +210,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(btnRestaurant)
                 .addGap(18, 18, 18)
                 .addComponent(btnDelivery)
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
 
         jSplitPane.setRightComponent(jPanel2);

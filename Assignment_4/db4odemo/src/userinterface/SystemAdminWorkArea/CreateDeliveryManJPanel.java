@@ -64,17 +64,19 @@ public class CreateDeliveryManJPanel extends javax.swing.JPanel {
         txtPhoneNumber = new javax.swing.JTextField();
         btnCreate = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(204, 204, 255));
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel8.setText("Username*:");
+        jLabel8.setText("Username :");
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel9.setText("Password*:");
+        jLabel9.setText("Password :");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel1.setText("Create DeliveryMan");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Create Delivery Executive Details");
 
+        btnBack.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnBack.setText("<Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,23 +85,24 @@ public class CreateDeliveryManJPanel extends javax.swing.JPanel {
         });
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("First Name*:");
+        jLabel2.setText("First Name :");
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Lastt Name*:");
+        jLabel3.setText("Last Name :");
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("Email Address*:");
+        jLabel4.setText("Email Address :");
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Age*:");
+        jLabel5.setText("Age :");
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("Home Address*:");
+        jLabel6.setText("Home Address :");
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel7.setText("Phone Number*:");
+        jLabel7.setText("Phone Number :");
 
+        btnCreate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnCreate.setText("Create");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,12 +115,7 @@ public class CreateDeliveryManJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(btnBack)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(144, 144, 144)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,17 +147,21 @@ public class CreateDeliveryManJPanel extends javax.swing.JPanel {
                                     .addComponent(txtAge, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtEmailAddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(btnBack)))
                 .addContainerGap(255, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBack)
-                    .addComponent(jLabel1))
-                .addGap(62, 62, 62)
+                .addComponent(jLabel1)
+                .addGap(21, 21, 21)
+                .addComponent(btnBack)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -193,7 +195,7 @@ public class CreateDeliveryManJPanel extends javax.swing.JPanel {
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addComponent(btnCreate)
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -214,7 +216,7 @@ public class CreateDeliveryManJPanel extends javax.swing.JPanel {
         if(txtFirstName.getText().isEmpty() || txtLastName.getText().isEmpty() || txtEmailAddress.getText().isEmpty() ||
             txtPhoneNumber.getText().isEmpty() || txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty() ||
             txtHomeAddress.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Fields cannot be left empty");
+            JOptionPane.showMessageDialog(null, "Fields cannot be left empty!");
             return;
         }
 
@@ -226,14 +228,14 @@ public class CreateDeliveryManJPanel extends javax.swing.JPanel {
         flag = firstName.matches("^[a-zA-Z]+$");
 
         if(flag == false) {
-            JOptionPane.showMessageDialog(null, "First name cannot have integer values");
+            JOptionPane.showMessageDialog(null, "First name cannot have integer values!");
             return;
         }
 
         flag = lastName.matches("^[a-zA-Z]+$");
 
         if(!flag) {
-            JOptionPane.showMessageDialog(null, "Last name cannot have integer values");
+            JOptionPane.showMessageDialog(null, "Last name cannot have integer values!");
             return;
         }
 
@@ -250,7 +252,7 @@ public class CreateDeliveryManJPanel extends javax.swing.JPanel {
 
         for(DeliveryMan deliveryMan : deliveryManDirectory.getDeliveryManDirectory()) {
             if(deliveryMan.getEmail().equals(email)) {
-                JOptionPane.showMessageDialog(null, "Email Address already exists");
+                JOptionPane.showMessageDialog(null, "Email Address already exists!");
                 return;
             }
         }
@@ -258,17 +260,17 @@ public class CreateDeliveryManJPanel extends javax.swing.JPanel {
         String phoneNumber = txtPhoneNumber.getText();
 
         if(phoneNumber.length() != 10) {
-            JOptionPane.showMessageDialog(null, "PhoneNumber must be of 10 digits");
+            JOptionPane.showMessageDialog(null, "Phone Number must be 10 digits only!");
             return;
         }
         flag = phoneNumber.matches("^[0-9]+$");
         if(!flag) {
-            JOptionPane.showMessageDialog(null, "Phone Number must have digits only");
+            JOptionPane.showMessageDialog(null, "Phone Number must have digits only!");
             return;
         }
         for(DeliveryMan deliveryMan : deliveryManDirectory.getDeliveryManDirectory()) {
             if(deliveryMan.getPhoneNumber().equals(phoneNumber)) {
-                JOptionPane.showMessageDialog(null, "Phone Number already exists");
+                JOptionPane.showMessageDialog(null, "Phone Number already exists. Enter another");
                 return;
             }
         }
@@ -280,7 +282,7 @@ public class CreateDeliveryManJPanel extends javax.swing.JPanel {
             age = Integer.parseInt(txtAge.getText());
 
         } catch(Exception e) {
-            JOptionPane.showMessageDialog(null, "Age must have integers only");
+            JOptionPane.showMessageDialog(null, "Age must be in integers only");
             return;
         }
 
@@ -290,7 +292,7 @@ public class CreateDeliveryManJPanel extends javax.swing.JPanel {
 
         for(UserAccount account : ecoSystem.getUserAccountDirectory().getUserAccountList()) {
             if(account.getUsername().equals(userName)) {
-                JOptionPane.showMessageDialog(null, "Username Already exists");
+                JOptionPane.showMessageDialog(null, "Username Already exists!Try Another");
                 return;
             }
         }
@@ -299,7 +301,7 @@ public class CreateDeliveryManJPanel extends javax.swing.JPanel {
         Employee employee = ecoSystem.getEmployeeDirectory().createEmployee(email);
         ecoSystem.getUserAccountDirectory().createUserAccount(userName, password, employee, new DeliverManRole());
 
-        JOptionPane.showMessageDialog(null, "DeliveryMan Profile Created");
+        JOptionPane.showMessageDialog(null, "Delivery man profile is created Successfully!");
 
     }//GEN-LAST:event_btnCreateActionPerformed
 

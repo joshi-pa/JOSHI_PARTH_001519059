@@ -35,10 +35,13 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
     private DeliveryManDirectory deliveryManDirectory;
     private MenuDirectory menuDirectory;
     private OrderDirectory orderDirectory;
-    private static int count = 1;
-    /**
-     * Creates new form DoctorWorkAreaJPanel
-     */
+//    private static int count = 1;
+    private int count;
+    
+    
+    
+    
+    
     public CustomerAreaJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem ecoSystem, 
             CustomerDirectory customerDirectory, RestaurantDirectory restaurantDirectory, 
             DeliveryManDirectory deliveryManDirectory, MenuDirectory menuDirectory, OrderDirectory orderDirectory) {
@@ -54,6 +57,7 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         this.orderDirectory = ecoSystem.getOrderDirectory();
         valueLabel.setText(account.getUsername());
         populateRequestTable();
+        count = workRequestJTable.getRowCount();
         populateRestaurantCombo();
         
         
@@ -66,9 +70,11 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         Restaurant restaurant = ecoSystem.getRestaurantDirectory().getRestaurant(restaurantName);
         for(Menu menu : ecoSystem.getMenuDirectory().getMenuDirectory()){
             if(restaurant.getRestaurantName().equals(menu.getRestaurantName())) {
-                Object [] row = new Object[2];
+                Object [] row = new Object[4];
                 row[0] = menu;
                 row[1] = menu.getPrice();
+                row[2] = menu.getCuisine();
+                row[3] = menu.getItemType();
                 dtm.addRow(row);
             }
         }
@@ -76,9 +82,8 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
     
     public void populateRestaurantCombo() {
         cmbRestaurant.removeAllItems();
-        cmbRestaurant.addItem("  ");
+        cmbRestaurant.addItem("--Select Restaurant--");
         for(Restaurant res : ecoSystem.getRestaurantDirectory().getRestaurantDirectory()) {
-            //System.out.println("res" + res);
             cmbRestaurant.addItem(res.getRestaurantName());
         }
     }
@@ -87,7 +92,6 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
         model.setRowCount(0);
         for (Order order : ecoSystem.getOrderDirectory().getOrderDirectory()){
-            //System.out.println("Order" + order.getOrderId());
             if(account.getEmployee().getName().equals(order.getCustomer().getName())) {
                 Object[] row = new Object[8];
                 row[0] = order;
@@ -128,7 +132,7 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         btnMenuShow = new javax.swing.JButton();
         cmbRestaurant = new javax.swing.JComboBox<>();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(204, 255, 204));
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -161,6 +165,7 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
             workRequestJTable.getColumnModel().getColumn(4).setResizable(false);
         }
 
+        requestTestJButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         requestTestJButton.setText("Add Comment");
         requestTestJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,6 +173,7 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        refreshTestJButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         refreshTestJButton.setText("Refresh");
         refreshTestJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,25 +182,38 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         });
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        enterpriseLabel.setText("Customer :");
+        enterpriseLabel.setText("Welcome,");
 
+        valueLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         valueLabel.setText("<value>");
 
         tblItem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Item Name", "Price"
+                "Item Name", "Price", "Cuisine", "Item Type"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tblItem);
 
-        jLabel1.setText("Quantity:");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setText("Enter Quantity:");
 
+        txtQuantity.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+
+        btnConfirm.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnConfirm.setText("Confirm");
         btnConfirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,8 +221,10 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Comment:");
 
+        btnMenuShow.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnMenuShow.setText("Show Menu");
         btnMenuShow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,7 +232,13 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        cmbRestaurant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbRestaurant.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        cmbRestaurant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Select Restaurant--", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbRestaurant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbRestaurantActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -220,11 +247,11 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(198, 198, 198)
+                        .addGap(165, 165, 165)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(141, 141, 141)
+                        .addGap(168, 168, 168)
                         .addComponent(btnConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(114, 114, 114)
@@ -241,10 +268,10 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(21, 21, 21)
-                            .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(30, 30, 30)
-                            .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(enterpriseLabel)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(102, 102, 102)
                             .addComponent(cmbRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnMenuShow))
@@ -253,8 +280,8 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1216, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(109, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,10 +289,11 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnMenuShow)
                         .addComponent(cmbRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
@@ -281,9 +309,9 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtComment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(28, 28, 28)
                 .addComponent(requestTestJButton)
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -296,26 +324,31 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         
         int selectedRow = workRequestJTable.getSelectedRow();
         if(selectedRow < 0) {
-            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
         Order order = (Order)workRequestJTable.getValueAt(selectedRow, 0);
         order.setMessage(txtComment.getText());
         populateRequestTable();
+        txtComment.setText(" ");
+        JOptionPane.showMessageDialog(null, "Comment Added for the Order");
     }//GEN-LAST:event_requestTestJButtonActionPerformed
 
     private void refreshTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshTestJButtonActionPerformed
 
         populateRequestTable();
+        txtQuantity.setText(" ");
+//        populateTable();
         
     }//GEN-LAST:event_refreshTestJButtonActionPerformed
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
         // TODO add your handling code here:
-         int selectedRow = tblItem.getSelectedRow();
+        
+        int selectedRow = tblItem.getSelectedRow();
         if(selectedRow < 0) {
-            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
@@ -348,6 +381,10 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         }
         populateTable();
     }//GEN-LAST:event_btnMenuShowActionPerformed
+
+    private void cmbRestaurantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRestaurantActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbRestaurantActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirm;

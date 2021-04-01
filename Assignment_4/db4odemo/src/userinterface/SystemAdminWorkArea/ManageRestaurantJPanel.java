@@ -80,11 +80,13 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel1.setText("Manage Restaurant");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Manage Restaurants");
 
+        tblRestaurant.setBackground(new java.awt.Color(204, 255, 204));
         tblRestaurant.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -110,6 +112,7 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
             tblRestaurant.getColumnModel().getColumn(2).setResizable(false);
         }
 
+        btnModify.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnModify.setText("Modify Restaurant");
         btnModify.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,6 +120,7 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnCreate.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnCreate.setText("Create Restaurant");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,6 +128,7 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnDelete.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnDelete.setText("Delete Restaurant");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,6 +136,7 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnBack.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnBack.setText("<<Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,33 +152,31 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
                 .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnBack)
-                        .addGap(183, 183, 183)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(137, 137, 137)
                         .addComponent(btnModify, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(148, 148, 148)
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBack))
                 .addContainerGap(132, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(btnBack))
-                .addGap(61, 61, 61)
+                .addGap(19, 19, 19)
+                .addComponent(jLabel1)
+                .addGap(26, 26, 26)
+                .addComponent(btnBack)
+                .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDelete)
                     .addComponent(btnCreate)
                     .addComponent(btnModify))
-                .addContainerGap(411, Short.MAX_VALUE))
+                .addContainerGap(433, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -195,11 +199,11 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int selectedRow = tblRestaurant.getSelectedRow();
         if(selectedRow < 0) {
-            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Please select a restaurant from the table", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         Restaurant restaurant = (Restaurant)tblRestaurant.getValueAt(selectedRow,0);
-        ModifyManagerJPanel modifyManager = new ModifyManagerJPanel(userProcessContainer, ecoSystem, restaurantDirectory, restaurant);
+        ModifyRestaurantJPanel modifyManager = new ModifyRestaurantJPanel(userProcessContainer, ecoSystem, restaurantDirectory, restaurant);
         userProcessContainer.add("ModifyManagerJPanel",modifyManager);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -218,7 +222,7 @@ public class ManageRestaurantJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int selectedRow = tblRestaurant.getSelectedRow();
         if(selectedRow < 0) {
-            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Please select a restaurant from the table", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
