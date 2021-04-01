@@ -55,7 +55,7 @@
                           <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="valueLabel" min="-2" pref="158" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cmbRestaurant" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbRestaurant" min="-2" pref="269" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="btnMenuShow" min="-2" max="-2" attributes="0"/>
                       </Group>

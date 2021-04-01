@@ -59,6 +59,8 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
         txtUsername = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JTextField();
+        txtRating = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -97,6 +99,9 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Password*:");
 
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel10.setText("Rating Price*:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -131,7 +136,11 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
                                     .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addComponent(txtRating, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(286, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -165,7 +174,11 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(62, 62, 62)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
                 .addComponent(btnCreate)
                 .addContainerGap(122, Short.MAX_VALUE))
         );
@@ -193,6 +206,7 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
 
         String restaurantName = txtRestaurantName.getText();
         String managerName = txtManagerName.getText();
+        String restRating = txtRating.getText();
 
         boolean flag ;
 
@@ -204,6 +218,13 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
         }
 
         flag = managerName.matches("^[a-zA-Z]+$");
+
+        if(!flag) {
+            JOptionPane.showMessageDialog(null, "Last name cannot have integer values");
+            return;
+        }
+        
+        flag = restRating.matches("^[a-zA-Z]+$");
 
         if(!flag) {
             JOptionPane.showMessageDialog(null, "Last name cannot have integer values");
@@ -244,7 +265,7 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
         //Restaurant restaurant = restaurantDirectory.newRestaurant(restaurantName, address, managerName, phoneNumber);
         //System.out.println(restaurant.getRestaurantName() + " + ");
         System.out.println("Eco" + ecoSystem.getRestaurantDirectory().getRestaurantDirectory().size());
-        ecoSystem.getRestaurantDirectory().newRestaurant(restaurantName, address, managerName, phoneNumber);
+        ecoSystem.getRestaurantDirectory().newRestaurant(restaurantName, address, managerName, phoneNumber, restRating);
         
         Employee employee = ecoSystem.getEmployeeDirectory().createEmployee(restaurantName);
         UserAccount userAccount = ecoSystem.getUserAccountDirectory().createUserAccount(userName, password, employee, new AdminRole());
@@ -258,6 +279,7 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCreate;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
@@ -268,6 +290,7 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtManagerName;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtPhoneNumber;
+    private javax.swing.JTextField txtRating;
     private javax.swing.JTextField txtRestaurantName;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables

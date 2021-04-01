@@ -35,7 +35,7 @@ public class ModifyManagerJPanel extends javax.swing.JPanel {
         txtRestaurantName.setText(restaurant.getRestaurantName());
         txtAddress.setText(restaurant.getAddress());
         txtPhoneNumber.setText(restaurant.getPhoneNumber());
-        txtManagerName.setText(restaurant.getManagerName());
+        txtManagerName.setText(restaurant.getRestroManagerName());
     }
 
     /**
@@ -188,7 +188,7 @@ public class ModifyManagerJPanel extends javax.swing.JPanel {
         String address = txtAddress.getText();
 
         restaurant.setRestaurantName(txtRestaurantName.getText());
-        restaurant.setManagerName(txtManagerName.getText());
+        restaurant.setRestroManagerName(txtManagerName.getText());
         restaurant.setPhoneNumber(phoneNumber);
         restaurant.setAddress(address);
 

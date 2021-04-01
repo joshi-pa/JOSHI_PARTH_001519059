@@ -18,8 +18,8 @@ import Business.Restaurant.RestaurantDirectory;
  *
  * @author raunak
  */
-public class SystemAdminRole extends Role{  
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business, CustomerDirectory customerDirectory, RestaurantDirectory restaurantDirectory, DeliveryManDirectory deliveryManDirectory, MenuDirectory menuDirectory, OrderDirectory orderDirectory) {
+public class SystemAdminRole extends Role{
+        public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business, CustomerDirectory customerDirectory, RestaurantDirectory restaurantDirectory, DeliveryManDirectory deliveryManDirectory, MenuDirectory menuDirectory, OrderDirectory orderDirectory) {
         return new SystemAdminWorkAreaJPanel(userProcessContainer, business, customerDirectory, restaurantDirectory, deliveryManDirectory);
     }
     

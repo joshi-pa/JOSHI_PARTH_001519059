@@ -42,12 +42,29 @@ public class MainJFrame extends javax.swing.JFrame {
         initComponents();
         system = dB4OUtil.retrieveSystem();
         this.setSize(1680, 1050);
+        
+        
+        
+//        system.setCustomerDirectory(new CustomerDirectory());
+        
+        
+        
+        
         customerDirectory = new CustomerDirectory();
         restaurantDirectory = new RestaurantDirectory();
         deliveryManDirectory = new DeliveryManDirectory();
         menuDirectory = new MenuDirectory();
         orderDirectory = new OrderDirectory();
-
+        
+        
+        
+//        system.setDeliveryManDirectory(new DeliveryManDirectory());
+//        system.setMenuDirectory(new MenuDirectory());
+//        system.setRestaurantDirectory(new RestaurantDirectory());
+//        system.setOrderDirectory(new OrderDirectory());
+        
+        
+        
     }
 
     /**

@@ -93,6 +93,11 @@ public class EcoSystem extends Organization{
     }
     private EcoSystem(){
         super(null);
+        customerDirectory = new CustomerDirectory();
+        restaurantDirectory = new RestaurantDirectory();
+        deliveryManDirectory = new DeliveryManDirectory();
+        menuDirectory = new MenuDirectory();
+        orderDirectory = new OrderDirectory();
        // networkList=new ArrayList<Network>();
     }
 

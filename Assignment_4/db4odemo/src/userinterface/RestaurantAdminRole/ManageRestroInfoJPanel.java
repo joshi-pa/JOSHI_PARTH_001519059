@@ -51,7 +51,7 @@ public class ManageRestroInfoJPanel extends javax.swing.JPanel {
         Object [] row = new Object[4];
         row[0] = restaurant;
         row[1] = restaurant.getAddress();
-        row[2] = restaurant.getManagerName();
+        row[2] = restaurant.getRestroManagerName();
         row[3] = restaurant.getPhoneNumber();
         
         dtm.addRow(row);
@@ -64,7 +64,7 @@ public class ManageRestroInfoJPanel extends javax.swing.JPanel {
         Object [] row = new Object[4];
         row[0] = restaurant;
         row[1] = restaurant.getAddress();
-        row[2] = restaurant.getManagerName();
+        row[2] = restaurant.getRestroManagerName();
         row[3] = restaurant.getPhoneNumber();
         dtm.addRow(row);
     }
