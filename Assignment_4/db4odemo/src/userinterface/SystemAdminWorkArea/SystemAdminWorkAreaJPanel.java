@@ -150,12 +150,14 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Displaying :");
 
+        lblSelectedNode.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblSelectedNode.setText("<View_selected_node>");
 
         btnCustomer.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnCustomer.setText("Manage All Customers");
+        btnCustomer.setText("Manage  Customers");
         btnCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCustomerActionPerformed(evt);

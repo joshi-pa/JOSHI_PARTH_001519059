@@ -25,6 +25,7 @@ public class Order extends WorkRequest{
     private Menu menu;
     private String result;
     private boolean assign;
+    private String orderFeedback;
 
     public boolean isAssign() {
         return assign;
@@ -100,6 +101,14 @@ public class Order extends WorkRequest{
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public String getOrderFeedback() {
+        return orderFeedback;
+    }
+
+    public void setOrderFeedback(String orderFeedback) {
+        this.orderFeedback = orderFeedback;
     }
     
     

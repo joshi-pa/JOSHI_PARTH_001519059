@@ -17,9 +17,25 @@ import Business.Restaurant.RestaurantDirectory;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import static jdk.nashorn.internal.objects.NativeMath.max;
 
 /**
  *
@@ -35,9 +51,12 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
     private DeliveryManDirectory deliveryManDirectory;
     private MenuDirectory menuDirectory;
     private OrderDirectory orderDirectory;
-//    private static int count = 1;
-    private int count;
     
+    
+//    private int count = 1;
+//    private int count;
+//    private String idCOunt;
+//    private int lnum;
     
     
     
@@ -57,8 +76,12 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         this.orderDirectory = ecoSystem.getOrderDirectory();
         valueLabel.setText(account.getUsername());
         populateRequestTable();
-        count = workRequestJTable.getRowCount();
-        populateRestaurantCombo();
+        initializeLastOrderID();
+//        count = workRequestJTable.getRowCount();
+
+        
+        populateRestaurantCombo(); 
+        
         
         
     }
@@ -104,8 +127,12 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
                 row[7] = order.getQuantity();
                 model.addRow(row);
             }
-        }
+        }     
     }
+    
+    
+    
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -131,6 +158,12 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         txtComment = new javax.swing.JTextField();
         btnMenuShow = new javax.swing.JButton();
         cmbRestaurant = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        btnfeedback = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtFeedback = new javax.swing.JTextArea();
+        lblLogo = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 255, 204));
 
@@ -149,7 +182,7 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, true
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -199,7 +232,7 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -240,12 +273,47 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel3.setText("Orders :");
+
+        btnfeedback.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnfeedback.setText("Add Feedback");
+        btnfeedback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnfeedbackActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setText("Provide Feedback:");
+
+        txtFeedback.setColumns(20);
+        txtFeedback.setRows(5);
+        jScrollPane3.setViewportView(txtFeedback);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(requestTestJButton)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(40, 40, 40)
+                                .addComponent(txtComment, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(127, 127, 127)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(185, 185, 185)
+                                .addComponent(btnfeedback))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(165, 165, 165)
                         .addComponent(jLabel1)
@@ -254,33 +322,29 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
                         .addGap(168, 168, 168)
                         .addComponent(btnConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(refreshTestJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(requestTestJButton)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(40, 40, 40)
-                                        .addComponent(txtComment, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(452, 452, 452))))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(21, 21, 21)
-                            .addComponent(enterpriseLabel)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(102, 102, 102)
-                            .addComponent(cmbRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnMenuShow))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(195, 195, 195)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(21, 21, 21)
+                                .addComponent(enterpriseLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(102, 102, 102)
+                                .addComponent(cmbRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnMenuShow))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(195, 195, 195)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(48, 48, 48)
+                        .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(refreshTestJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1166, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(159, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -295,23 +359,39 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
                         .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnConfirm))
-                .addGap(75, 75, 75)
-                .addComponent(refreshTestJButton)
-                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(refreshTestJButton)
+                        .addGap(25, 25, 25))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtComment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addComponent(requestTestJButton)
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtComment, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel4)))
+                        .addGap(28, 28, 28)
+                        .addComponent(requestTestJButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnfeedback)))
+                .addGap(18, 108, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -332,13 +412,13 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         order.setMessage(txtComment.getText());
         populateRequestTable();
         txtComment.setText(" ");
-        JOptionPane.showMessageDialog(null, "Comment Added for the Order");
+        JOptionPane.showMessageDialog(null, "Comment is added for the Order");
     }//GEN-LAST:event_requestTestJButtonActionPerformed
 
     private void refreshTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshTestJButtonActionPerformed
 
         populateRequestTable();
-        txtQuantity.setText(" ");
+        txtQuantity.setText("");
 //        populateTable();
         
     }//GEN-LAST:event_refreshTestJButtonActionPerformed
@@ -346,27 +426,122 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
         // TODO add your handling code here:
         
-        int selectedRow = tblItem.getSelectedRow();
-        if(selectedRow < 0) {
-            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
+        try {
+            InputStreamReader reader = new InputStreamReader(new FileInputStream("src/MyFile.txt"), "UTF-8");
+            try {
+                int lnum= reader.read();
+//                this.lnum = lastnum;
+//                idCOunt = String.valueOf(lnum);
+                int selectedRow = tblItem.getSelectedRow();
+                //        int selectedRow []= tblItem.getSelectedRows();
+                if(selectedRow < 0) {
+                    JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warning", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+                int quantity = Integer.parseInt(txtQuantity.getText());
+                String restaurantName = cmbRestaurant.getSelectedItem().toString();
+                Restaurant restaurant = ecoSystem.getRestaurantDirectory().getRestaurant(restaurantName);
+                Customer customer = ecoSystem.getCustomerDirectory().getCustomer(account.getEmployee().getName());
+//                int lastOrderID ;
+                Menu menu = (Menu) tblItem.getValueAt(selectedRow, 0);
+                String status = "Order Placed";
+
+                Order order = ecoSystem.getOrderDirectory().newOrder();
+                order.setCustomer(customer);
+
+
+        // commented 
+                order.setOrderId(String.valueOf(lnum++));
+                order.setQuantity(quantity);
+                order.setMenu(menu);
+                order.setRestaurant(restaurant);
+                order.setOrderStatus(status);
+                order.setAssign(false);
+                OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream("src/MyFile.txt"), "UTF-8");
+                writer.write(lnum);
+                writer.close();
+
+
+            } catch (IOException ex) {
+                Logger.getLogger(CustomerAreaJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(CustomerAreaJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(CustomerAreaJPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        int quantity = Integer.parseInt(txtQuantity.getText());
-        String restaurantName = cmbRestaurant.getSelectedItem().toString();
-        Restaurant restaurant = ecoSystem.getRestaurantDirectory().getRestaurant(restaurantName);
-        Customer customer = ecoSystem.getCustomerDirectory().getCustomer(account.getEmployee().getName());
-        Menu menu = (Menu) tblItem.getValueAt(selectedRow, 0);
-        String status = "Order Placed";
+//        int selectedRow = tblItem.getSelectedRow();
+////        int selectedRow []= tblItem.getSelectedRows();
+//        if(selectedRow < 0) {
+//            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warning", JOptionPane.WARNING_MESSAGE);
+//            return;
+//        }
+//        int quantity = Integer.parseInt(txtQuantity.getText());
+//        String restaurantName = cmbRestaurant.getSelectedItem().toString();
+//        Restaurant restaurant = ecoSystem.getRestaurantDirectory().getRestaurant(restaurantName);
+//        Customer customer = ecoSystem.getCustomerDirectory().getCustomer(account.getEmployee().getName());
+//        int lastOrderID ;
+//        Menu menu = (Menu) tblItem.getValueAt(selectedRow, 0);
+//        String status = "Order Placed";
+//
+//        Order order = ecoSystem.getOrderDirectory().newOrder();
+//        order.setCustomer(customer);
+//        
+//
+//// commented 
+//        order.setOrderId(String.valueOf(lnum++));
+//        order.setQuantity(quantity);
+//        order.setMenu(menu);
+//        order.setRestaurant(restaurant);
+//        order.setOrderStatus(status);
+//        order.setAssign(false);
+//        String status = "Order Placed";
+//        ***********************************************************
+//        for (int i=0; i < selectedRow.length; i++){
+//            
+//            String status = "Order Placed";
+//            Menu menu = (Menu) tblItem.getValueAt(i, 0);
+//            
+//            
+//            Order order = ecoSystem.getOrderDirectory().newOrder();
+//            order.setCustomer(customer);
+//        //        for (Order order : ecoSystem.getOrderDirectory().getOrderDirectory()){
+//        //            cou
+//        //        }
+//        //        count = ecoSystem.getOrderDirectory()
+//            order.setOrderId(String.valueOf(lnum++));
+//            order.setQuantity(quantity);
+//            order.setMenu(menu);
+//            order.setRestaurant(restaurant);
+//            order.setOrderStatus(status);
+//            order.setAssign(false);
+//                        
+//        }
         
-        Order order = ecoSystem.getOrderDirectory().newOrder();
-        order.setCustomer(customer);
-        order.setOrderId(String.valueOf(count++));
-        order.setQuantity(quantity);
-        order.setMenu(menu);
-        order.setRestaurant(restaurant);
-        order.setOrderStatus(status);
-        order.setAssign(false);
+        
+//        int lastOrderID = lnum;
+//        String num = String.valueOf(lastOrderID);
+//        FileWriter writer = new FileWriter("YourFile.txt");
+//        try {
+//            try {
+//                OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream("src/MyFile.txt"), "UTF-8");
+//                try {
+//                    writer.write(num);
+//                    writer.close();
+//                } catch (IOException ex) {
+//                    Logger.getLogger(CustomerAreaJPanel.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            } catch (UnsupportedEncodingException ex) {
+//                Logger.getLogger(CustomerAreaJPanel.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        } catch (FileNotFoundException ex) {
+//            Logger.getLogger(CustomerAreaJPanel.class.getName()).log(Level.SEVERE, null, ex);
+//        }    
+//          ***********************************************************        
+        
+        
+// commented 
         
         JOptionPane.showMessageDialog(null,"You have placed an order");
         populateRequestTable();
@@ -380,27 +555,93 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
             return;
         }
         populateTable();
+        String restaurantName = cmbRestaurant.getSelectedItem().toString();
+        Restaurant restaurant = ecoSystem.getRestaurantDirectory().getRestaurant(restaurantName);
+        String logo = restaurant.getRestLogo();
+        lblLogo.setIcon(display(logo));
+//        System.out.println(logo);
+//        BufferedImage image = ImageIO.read(logo);
+//        originalImageBuffer = image;
+//        ImageIcon icon = new ImageIcon(image);
+
     }//GEN-LAST:event_btnMenuShowActionPerformed
 
     private void cmbRestaurantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRestaurantActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbRestaurantActionPerformed
 
+    private void btnfeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfeedbackActionPerformed
+        // TODO add your handling code here:
+        if(txtFeedback.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Feedback cannot be empty");
+            return;
+        }
+        
+        int selectedRow = workRequestJTable.getSelectedRow();
+        if(selectedRow < 0) {
+            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        
+        Order order = (Order)workRequestJTable.getValueAt(selectedRow, 0);
+        if (order.getOrderStatus().equals("Delivered")){
+        order.setOrderFeedback(txtFeedback.getText());
+        populateRequestTable();
+        txtFeedback.setText(" ");
+        JOptionPane.showMessageDialog(null, "Feedback is added for the Order");
+        System.out.println(order.getOrderFeedback());
+        }
+        else JOptionPane.showMessageDialog(null,"Order is yet to be delivered.","Warning",  JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_btnfeedbackActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirm;
     private javax.swing.JButton btnMenuShow;
+    private javax.swing.JButton btnfeedback;
     private javax.swing.JComboBox<String> cmbRestaurant;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblLogo;
     private javax.swing.JButton refreshTestJButton;
     private javax.swing.JButton requestTestJButton;
     private javax.swing.JTable tblItem;
     private javax.swing.JTextField txtComment;
+    private javax.swing.JTextArea txtFeedback;
     private javax.swing.JTextField txtQuantity;
     private javax.swing.JLabel valueLabel;
     private javax.swing.JTable workRequestJTable;
     // End of variables declaration//GEN-END:variables
+
+    private void initializeLastOrderID() {
+        try {
+            InputStreamReader reader = new InputStreamReader(new FileInputStream("src/MyFile.txt"), "UTF-8");
+            try {
+                int lastnum= reader.read();
+//                this.lnum = lastnum;
+//                idCOunt = String.valueOf(lnum);
+            } catch (IOException ex) {
+                Logger.getLogger(CustomerAreaJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(CustomerAreaJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(CustomerAreaJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private Icon display(String logo) {
+        ImageIcon ic = new ImageIcon(logo);
+        Image originalImage = ic.getImage();
+        Image scaledImage = originalImage.getScaledInstance(350, 175, Image.SCALE_SMOOTH);
+        ImageIcon image = new ImageIcon(scaledImage);
+        return image;
+        
+    }
 }

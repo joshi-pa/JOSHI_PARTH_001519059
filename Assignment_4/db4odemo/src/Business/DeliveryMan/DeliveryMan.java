@@ -15,13 +15,15 @@ public class DeliveryMan {
     private String email;
     private String phoneNumber;
     private int age;
+    private String driverlicense;
     
-    public DeliveryMan(String name, String address, String email, String phoneNumber, int age) {
+    public DeliveryMan(String name, String address, String email, String phoneNumber, int age, String driverlicense) {
         this.name = name;
         this.address = address;
         this.age = age;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.driverlicense = driverlicense;
     }
 
     public String getName() {
@@ -63,6 +65,15 @@ public class DeliveryMan {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public String getDriverlicense() {
+        return driverlicense;
+    }
+
+    public void setDriverlicense(String driverlicense) {
+        this.driverlicense = driverlicense;
+    }
+    
     
     @Override
     public String toString() {

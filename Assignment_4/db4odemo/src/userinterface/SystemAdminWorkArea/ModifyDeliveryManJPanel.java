@@ -76,27 +76,32 @@ public class ModifyDeliveryManJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Name :");
 
         txtName.setEditable(false);
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Email Address :");
 
         txtEmailAddress.setEditable(false);
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Age :");
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Home Address :");
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Phone Number :");
 
         btnCreate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnCreate.setText("Modify");
+        btnCreate.setText("Update");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCreateActionPerformed(evt);
@@ -227,6 +232,11 @@ public class ModifyDeliveryManJPanel extends javax.swing.JPanel {
         deliveryMan.setAddress(homeAddress);
 
         JOptionPane.showMessageDialog(null, "Delivery Executive Profile is updated Successfully!");
+        
+        txtAge.setEditable(false);
+        txtPhoneNumber.setEditable(false);
+        txtHomeAddress.setEditable(false);
+        
     }//GEN-LAST:event_btnCreateActionPerformed
 
 

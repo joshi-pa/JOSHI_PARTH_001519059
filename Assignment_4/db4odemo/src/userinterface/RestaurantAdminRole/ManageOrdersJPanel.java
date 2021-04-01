@@ -49,12 +49,14 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         for(Order order : ecoSystem.getOrderDirectory().getOrderDirectory()) {
             System.out.println(" Rest  " + account.getEmployee().getName() + "  " + order.getRestaurant().getRestaurantName());
             if(account.getEmployee().getName().equals(order.getRestaurant().getRestaurantName())) {
-                Object [] row = new Object[5];
+                Object [] row = new Object[7];
                 row[0] = order;
                 row[1] = order.getMenu().getItemName();
                 row[2] = order.getQuantity();
                 row[3] = order.getQuantity() * order.getMenu().getPrice();
                 row[4] = order.getOrderStatus();
+                row[5] = order.getMessage();
+                row[6] = order.getOrderFeedback();
                 dtm.addRow(row);
             }
         }
@@ -81,18 +83,18 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         tblOrder.setBackground(new java.awt.Color(204, 255, 204));
         tblOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Order ID", "Item Name", "Quantity", "Price", "Order Status"
+                "Order ID", "Item Name", "Quantity", "Price", "Order Status", "Message", "Feedback "
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -133,20 +135,20 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 905, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(268, 268, 268)
                         .addComponent(btnAccepted)
                         .addGap(78, 78, 78)
                         .addComponent(btnCompleted)))
-                .addContainerGap(103, Short.MAX_VALUE))
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

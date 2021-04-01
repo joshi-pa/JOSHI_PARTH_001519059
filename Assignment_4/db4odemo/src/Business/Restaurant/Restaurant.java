@@ -6,6 +6,7 @@
 package Business.Restaurant;
 
 import Business.Menu.MenuDirectory;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -19,13 +20,15 @@ public class Restaurant {
     private String phoneNumber;
     private MenuDirectory MenuDirectory;
     private String restRating;
+    private String restLogo;
     
-    public Restaurant(String restaurantName, String address, String managerName, String phoneNumber, String restRating) {
+    public Restaurant(String restaurantName, String address, String managerName, String phoneNumber, String restRating, String restLogo) {
         this.restaurantName = restaurantName;
         this.address = address;
         this.restroManagerName = managerName;
         this.phoneNumber = phoneNumber;
         this.restRating = restRating;
+        this.restLogo = restLogo;
     }
 
     public MenuDirectory getMenuDirectory() {
@@ -78,6 +81,18 @@ public class Restaurant {
     public void setRestRating(String restRating) {
         this.restRating = restRating;
     }
+
+    public String getRestLogo() {
+        return restLogo;
+    }
+
+    public void setRestLogo(String restLogo) {
+        this.restLogo = restLogo;
+    }
+
+    
+    
+  
     
     
     @Override

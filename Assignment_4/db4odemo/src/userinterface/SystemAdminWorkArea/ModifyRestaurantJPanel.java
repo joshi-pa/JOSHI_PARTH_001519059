@@ -73,15 +73,19 @@ public class ModifyRestaurantJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Restaurant Name :");
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Address :");
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Manager Name :");
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Phone Number :");
 
@@ -194,6 +198,13 @@ public class ModifyRestaurantJPanel extends javax.swing.JPanel {
         restaurant.setAddress(address);
 
         JOptionPane.showMessageDialog(null, "Restaurant details are updated Successfully!");
+        
+        txtAddress.setEditable(false);
+        txtManagerName.setEditable(false);
+        txtPhoneNumber.setEditable(false);
+        txtRestaurantName.setEditable(false);
+        
+            
     }//GEN-LAST:event_btnCreateActionPerformed
 
 

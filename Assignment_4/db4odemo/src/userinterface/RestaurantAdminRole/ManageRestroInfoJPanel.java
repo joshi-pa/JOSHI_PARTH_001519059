@@ -89,8 +89,6 @@ public class ManageRestroInfoJPanel extends javax.swing.JPanel {
         tblRestaurant.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
