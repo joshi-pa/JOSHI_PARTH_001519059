@@ -191,7 +191,7 @@ public class ModifyDeliveryManJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         if(txtName.getText().isEmpty() || txtEmailAddress.getText().isEmpty() ||
             txtPhoneNumber.getText().isEmpty() || txtHomeAddress.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Fields cannot be left empty");
+            JOptionPane.showMessageDialog(null, "Any Field cannot be left empty");
             return;
         }
 

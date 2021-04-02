@@ -43,8 +43,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         this.deliveryManDirectory = ecosystem.getDeliveryManDirectory();
         this.restaurantDirectory = ecosystem.getRestaurantDirectory();
         populateTree();
-        //lblSelectedNode.setText();
-        //System.out.println("EcoSYSTEM MAIN" + ecosystem.toString() + ecosystem.getCustomerDirectory().getCustomerDirectory().size());
+        
     }
     
     public void populateTree(){

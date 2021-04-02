@@ -170,7 +170,7 @@
                 <Column editable="false" title="Price" type="java.lang.Object"/>
                 <Column editable="false" title="Restaurant" type="java.lang.Object"/>
                 <Column editable="false" title="Message" type="java.lang.String"/>
-                <Column editable="false" title="Receiver" type="java.lang.String"/>
+                <Column editable="false" title="Customer" type="java.lang.String"/>
                 <Column editable="false" title="Status" type="java.lang.String"/>
               </Table>
             </Property>

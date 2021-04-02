@@ -175,7 +175,7 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Order ID", "Item Name", "Quantity", "Price", "Restaurant", "Message", "Receiver", "Status"
+                "Order ID", "Item Name", "Quantity", "Price", "Restaurant", "Message", "Customer", "Status"
             }
         ) {
             Class[] types = new Class [] {
