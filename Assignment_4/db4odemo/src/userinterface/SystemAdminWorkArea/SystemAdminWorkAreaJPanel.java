@@ -111,7 +111,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree = new javax.swing.JTree();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblDisplay = new javax.swing.JLabel();
         lblSelectedNode = new javax.swing.JLabel();
         btnCustomer = new javax.swing.JButton();
         btnRestaurant = new javax.swing.JButton();
@@ -149,8 +149,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel1.setText("Displaying :");
+        lblDisplay.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblDisplay.setText("Displaying :");
 
         lblSelectedNode.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblSelectedNode.setText("<View_selected_node>");
@@ -187,7 +187,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addComponent(jLabel1)
+                        .addComponent(lblDisplay)
                         .addGap(18, 18, 18)
                         .addComponent(lblSelectedNode))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -203,7 +203,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(lblDisplay)
                     .addComponent(lblSelectedNode))
                 .addGap(54, 54, 54)
                 .addComponent(btnCustomer)
@@ -254,12 +254,12 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnCustomer;
     private javax.swing.JButton btnDelivery;
     private javax.swing.JButton btnRestaurant;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane;
     private javax.swing.JTree jTree;
+    private javax.swing.JLabel lblDisplay;
     private javax.swing.JLabel lblSelectedNode;
     // End of variables declaration//GEN-END:variables
 }

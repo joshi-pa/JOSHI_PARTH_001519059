@@ -40,6 +40,7 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
         this.orderDirectory = business.getOrderDirectory();
         this.deliveryManDirectory = business.getDeliveryManDirectory();
         populateTable();
+        populateDeliveryManTable();
     }
     
     public void populateTable(){
