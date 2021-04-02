@@ -305,7 +305,7 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         }
         
         int selectedRow = tblOrder.getSelectedRow();
-        if(selectedRow < 1) {
+        if(selectedRow < 0) {
             JOptionPane.showMessageDialog(null,"Please Select an order to be assigned", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }

@@ -46,7 +46,7 @@ public class MainJFrame extends javax.swing.JFrame {
         
         
 //        system.setCustomerDirectory(new CustomerDirectory());
-        
+//        
         
         
         
@@ -55,6 +55,7 @@ public class MainJFrame extends javax.swing.JFrame {
         deliveryManDirectory = new DeliveryManDirectory();
         menuDirectory = new MenuDirectory();
         orderDirectory = new OrderDirectory();
+        
         
         
         
