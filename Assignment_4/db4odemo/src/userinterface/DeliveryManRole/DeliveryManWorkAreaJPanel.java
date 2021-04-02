@@ -40,7 +40,7 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
         this.orderDirectory = business.getOrderDirectory();
         this.deliveryManDirectory = business.getDeliveryManDirectory();
         populateTable();
-        populateDeliveryManTable();
+        populateDeliveryTable();
     }
     
     public void populateTable(){
@@ -205,11 +205,11 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
 //        order.setDeliveryMan(userAccount.getEmployee().getName());
         order.setOrderStatus("Order Picked up");
         populateTable();
-        populateDeliveryManTable();
+        populateDeliveryTable();
                 
     }//GEN-LAST:event_btnPickUpActionPerformed
 
-    public void populateDeliveryManTable() {
+    public void populateDeliveryTable() {
         
         DefaultTableModel model = (DefaultTableModel) tblDeliveryMan.getModel();
         model.setRowCount(0);
@@ -246,13 +246,13 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
         //orderDirectory.getOrderDirectory().remove(order);
         
         JOptionPane.showMessageDialog(null, "The Order is delivered! Enjoy your food!");
-        populateDeliveryManTable();
+        populateDeliveryTable();
         
     }//GEN-LAST:event_processJButtonActionPerformed
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
         populateTable();
-        populateDeliveryManTable();
+        populateDeliveryTable();
     }//GEN-LAST:event_refreshJButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
