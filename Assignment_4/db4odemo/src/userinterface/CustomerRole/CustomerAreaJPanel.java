@@ -582,7 +582,7 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         
         int selectedRow = workRequestJTable.getSelectedRow();
         if(selectedRow < 0) {
-            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Select a row from table first", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
@@ -591,7 +591,7 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         if (order.getOrderStatus().equals("Delivered")){
         order.setOrderFeedback(txtFeedback.getText());
         populateRequestTable();
-        txtFeedback.setText(" ");
+        txtFeedback.setText("");
         JOptionPane.showMessageDialog(null, "Feedback is added for the Order");
         System.out.println(order.getOrderFeedback());
         }

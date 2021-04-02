@@ -103,9 +103,9 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="btnRestaurant" max="32767" attributes="0"/>
-                                  <Component id="btnCustomer" max="32767" attributes="0"/>
-                                  <Component id="btnDelivery" max="32767" attributes="0"/>
+                                  <Component id="btnManageRestaurants" max="32767" attributes="0"/>
+                                  <Component id="btnManageCustomer" max="32767" attributes="0"/>
+                                  <Component id="btnManageDeliveries" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -122,11 +122,11 @@
                           <Component id="lblSelectedNode" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                      <Component id="btnCustomer" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnManageCustomer" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnRestaurant" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnManageRestaurants" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnDelivery" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnManageDeliveries" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="191" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -149,7 +149,7 @@
                 <Property name="text" type="java.lang.String" value="&lt;View_selected_node&gt;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnCustomer">
+            <Component class="javax.swing.JButton" name="btnManageCustomer">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="1"/>
@@ -157,10 +157,10 @@
                 <Property name="text" type="java.lang.String" value="Manage  Customers"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCustomerActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageCustomerActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnRestaurant">
+            <Component class="javax.swing.JButton" name="btnManageRestaurants">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="1"/>
@@ -168,10 +168,10 @@
                 <Property name="text" type="java.lang.String" value="Manage Restaurants"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRestaurantActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageRestaurantsActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnDelivery">
+            <Component class="javax.swing.JButton" name="btnManageDeliveries">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="1"/>
@@ -179,7 +179,7 @@
                 <Property name="text" type="java.lang.String" value="Manage Delivery Executives"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeliveryActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageDeliveriesActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
