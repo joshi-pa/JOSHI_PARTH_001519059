@@ -5,10 +5,12 @@
  */
 package userinterface.RestaurantAdminRole;
 
+import Business.DeliveryMan.DeliveryMan;
 import Business.EcoSystem;
 import Business.Menu.MenuDirectory;
 import Business.Order.Order;
 import Business.Order.OrderDirectory;
+import Business.Restaurant.Restaurant;
 import Business.Restaurant.RestaurantDirectory;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
@@ -40,6 +42,7 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         this.menuDirectory = ecoSystem.getMenuDirectory();
         this.orderDirectory = ecoSystem.getOrderDirectory();
         populateTable();
+        populateDeliveryCOmbo();
     }
     
     public void populateTable() {
@@ -47,9 +50,9 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         dtm.setRowCount(0);
         
         for(Order order : ecoSystem.getOrderDirectory().getOrderDirectory()) {
-            System.out.println(" Rest  " + account.getEmployee().getName() + "  " + order.getRestaurant().getRestaurantName());
+            System.out.println(" Restaurant " + account.getEmployee().getName() + "  " + order.getRestaurant().getRestaurantName());
             if(account.getEmployee().getName().equals(order.getRestaurant().getRestaurantName())) {
-                Object [] row = new Object[7];
+                Object [] row = new Object[8];
                 row[0] = order;
                 row[1] = order.getMenu().getItemName();
                 row[2] = order.getQuantity();
@@ -57,6 +60,7 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
                 row[4] = order.getOrderStatus();
                 row[5] = order.getMessage();
                 row[6] = order.getOrderFeedback();
+                row[7] = order.getDeliveryMan();
                 dtm.addRow(row);
             }
         }
@@ -77,24 +81,28 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         btnAccepted = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
+        btnRejected = new javax.swing.JButton();
+        btnAssign = new javax.swing.JButton();
+        lblDelivery = new javax.swing.JLabel();
+        cmbDeliveryMan = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 204));
 
         tblOrder.setBackground(new java.awt.Color(204, 255, 204));
         tblOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Order ID", "Item Name", "Quantity", "Price", "Order Status", "Message", "Feedback "
+                "Order ID", "Item Name", "Quantity", "Price", "Order Status", "Message", "Feedback ", "Email - Delivery Man"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -131,24 +139,61 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnRejected.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnRejected.setText("Reject Order");
+        btnRejected.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRejectedActionPerformed(evt);
+            }
+        });
+
+        btnAssign.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnAssign.setText("Assign Delivery Executive :");
+        btnAssign.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssignActionPerformed(evt);
+            }
+        });
+
+        lblDelivery.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblDelivery.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lblDelivery.setText("Email Delivery Man:");
+
+        cmbDeliveryMan.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        cmbDeliveryMan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbDeliveryMan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbDeliveryManActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 905, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnAccepted)
+                                .addGap(163, 163, 163)
+                                .addComponent(btnRejected)
+                                .addGap(187, 187, 187)
+                                .addComponent(btnCompleted))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(btnAssign))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(268, 268, 268)
-                        .addComponent(btnAccepted)
-                        .addGap(78, 78, 78)
-                        .addComponent(btnCompleted)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(lblDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43)
+                        .addComponent(cmbDeliveryMan, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(224, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,8 +207,15 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCompleted)
-                    .addComponent(btnAccepted))
-                .addContainerGap(263, Short.MAX_VALUE))
+                    .addComponent(btnAccepted)
+                    .addComponent(btnRejected))
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbDeliveryMan, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAssign)
+                .addContainerGap(159, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -224,13 +276,98 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnRejectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectedActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblOrder.getSelectedRow();
+        if(selectedRow < 0) {
+            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        Order order = (Order)tblOrder.getValueAt(selectedRow, 0);
+        if(order.getOrderStatus().equals("Order Placed")) {
+            order.setOrderStatus("Order Rejected");
+        }
+        
+        else {
+            JOptionPane.showMessageDialog(null, "Order is already accepted or Completed");
+            return;
+        }
+        
+        populateTable();
+    }//GEN-LAST:event_btnRejectedActionPerformed
+
+    private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
+        // TODO add your handling code here:
+        if(cmbDeliveryMan.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Select a delivery person to deliver the order");
+            return;
+        }
+        
+        int selectedRow = tblOrder.getSelectedRow();
+        if(selectedRow < 1) {
+            JOptionPane.showMessageDialog(null,"Please Select an order to be assigned", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Order order = (Order) tblOrder.getValueAt(selectedRow,0);
+        order.setDeliveryMan(String.valueOf(cmbDeliveryMan.getSelectedItem()));
+        
+        if(order.getOrderStatus().equals("Order Ready for Pick up")) {
+            order.setOrderStatus("Delivery Man Assigned");
+            order.setAssign(true);
+        }
+        
+        else if(order.getOrderStatus().equals("Order Placed")) {
+            JOptionPane.showMessageDialog(null, "Order must be accepted first");
+            return;
+        }
+        
+        else if(order.getOrderStatus().equals("Order Accepted")) {
+            JOptionPane.showMessageDialog(null, "Order must be completed first");
+            return;
+        }
+        
+        
+        else if(order.getOrderStatus().equals("Order Rejected")) {
+            JOptionPane.showMessageDialog(null, "Delivery man cannot be assigned to rejected orders");
+            return;
+        }
+        
+        else {
+            JOptionPane.showMessageDialog(null, "Order is already ready for pick up");
+            return;
+        }
+        
+        
+        
+//        order.setOrderStatus("");
+        populateTable();
+        
+    }//GEN-LAST:event_btnAssignActionPerformed
+
+    private void cmbDeliveryManActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDeliveryManActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbDeliveryManActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccepted;
+    private javax.swing.JButton btnAssign;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCompleted;
+    private javax.swing.JButton btnRejected;
+    private javax.swing.JComboBox<String> cmbDeliveryMan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblDelivery;
     private javax.swing.JTable tblOrder;
     // End of variables declaration//GEN-END:variables
+
+    private void populateDeliveryCOmbo() {
+        cmbDeliveryMan.removeAllItems();
+        cmbDeliveryMan.addItem("--Select Delivery Exec--");
+        for(DeliveryMan dl : ecoSystem.getDeliveryManDirectory().getDeliveryManDirectory()) {
+            cmbDeliveryMan.addItem(dl.getEmail());
+        }
+    }
 }

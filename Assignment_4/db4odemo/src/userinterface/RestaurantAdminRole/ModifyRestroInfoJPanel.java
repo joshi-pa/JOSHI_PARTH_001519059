@@ -192,8 +192,8 @@ public class ModifyRestroInfoJPanel extends javax.swing.JPanel {
         userProcessContainer.remove(this);
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        ManageRestroInfoJPanel mrjp = (ManageRestroInfoJPanel) component;
-        mrjp.refreshTable();
+        ManageRestroInfoJPanel managerestroinfopanel = (ManageRestroInfoJPanel) component;
+        managerestroinfopanel.refreshTable();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed

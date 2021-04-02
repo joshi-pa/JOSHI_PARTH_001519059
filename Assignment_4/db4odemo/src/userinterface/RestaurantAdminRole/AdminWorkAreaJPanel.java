@@ -11,6 +11,9 @@ import Business.Order.OrderDirectory;
 import Business.Restaurant.RestaurantDirectory;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 /**
@@ -43,10 +46,21 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         this.menuDirectory = ecoSystem.getMenuDirectory();
         this.orderDirectory = ecoSystem.getOrderDirectory();
         valueLabel.setText(account.getUsername());
+        
+//        Restaurant restaurant = ecoSystem.getRestaurantDirectory().getRestaurant(restaurantName);
+//        String logo = ecoSystem.getRestaurantDirectory().getRestaurant(TOOL_TIP_TEXT_KEY)
+//        lblRestLogo.setIcon(display(logo));
       
         //valueLabel.setText();
     }
-    
+    private Icon display(String logo) {
+        ImageIcon ic = new ImageIcon(logo);
+        Image originalImage = ic.getImage();
+        Image scaledImage = originalImage.getScaledInstance(350, 175, Image.SCALE_SMOOTH);
+        ImageIcon image = new ImageIcon(scaledImage);
+        return image;
+        
+    }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -61,6 +75,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         manageOrganizationJButton = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
         valueLabel = new javax.swing.JLabel();
+        lblRestLogo = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 204));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -68,7 +83,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Restaurant Manager Dashboard");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 40, 580, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 580, -1));
 
         userJButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         userJButton.setText("Manage Restaurant Details");
@@ -107,12 +122,13 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         valueLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         valueLabel.setText("<value>");
         add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 130, -1));
+        add(lblRestLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, 210, 120));
     }// </editor-fold>//GEN-END:initComponents
 
     private void userJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userJButtonActionPerformed
         // TODO add your handling code here:
-        ManageRestroInfoJPanel mrijp = new ManageRestroInfoJPanel(userProcessContainer,account, ecoSystem, restaurantDirectory);
-        userProcessContainer.add("manageMenuJPanel",mrijp);
+        ManageRestroInfoJPanel manageRestroInfoPanel = new ManageRestroInfoJPanel(userProcessContainer,account, ecoSystem, restaurantDirectory);
+        userProcessContainer.add("manageMenuJPanel",manageRestroInfoPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
 
@@ -138,6 +154,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblRestLogo;
     private javax.swing.JButton manageEmployeeJButton;
     private javax.swing.JButton manageOrganizationJButton;
     private javax.swing.JButton userJButton;

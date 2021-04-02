@@ -158,7 +158,7 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
             }
         });
 
-        cmbItemType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Select--", "Pizza", "Burgers", "Tandoor", "Sandwich", "Desserts ", "Shakes" }));
+        cmbItemType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Select--", "Pizza", "Burgers", "Tandoor", "Sandwich", "Desserts ", "Shakes", "Soup", "Breads", "Sea Food", "Dips", "Coffee" }));
 
         btnAdd1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAdd1.setText("Delete Item");

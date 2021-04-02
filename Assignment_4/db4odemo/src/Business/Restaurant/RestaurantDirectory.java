@@ -30,7 +30,7 @@ public class RestaurantDirectory {
     public Restaurant newRestaurant(String name, String address, String restroMName, String phoneNumber, String restRating,String restLogo) {
         Restaurant restaurant = new Restaurant(name, address, restroMName, phoneNumber, restRating, restLogo);
         restaurantDirectory.add(restaurant);
-        System.out.println(restaurantDirectory.size() + "New Res");
+//        System.out.println(restaurantDirectory.size() + "New Res");
         return restaurant;
     }
     

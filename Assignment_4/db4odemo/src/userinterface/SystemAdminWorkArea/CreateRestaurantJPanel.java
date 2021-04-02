@@ -58,15 +58,15 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         txtAddress = new javax.swing.JTextField();
         btnCreate = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
+        lblUsername = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         cmbPriceRating = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         btnUpload = new javax.swing.JButton();
         lblLogo = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JPasswordField();
 
         setBackground(new java.awt.Color(204, 204, 255));
 
@@ -92,7 +92,7 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel7.setText("Phone Number :");
+        jLabel7.setText("Contact Number :");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -106,9 +106,9 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel8.setText("Username :");
+        lblUsername.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblUsername.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblUsername.setText("Username :");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -119,6 +119,7 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
         jLabel10.setText("Price Rating :");
 
         cmbPriceRating.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Select--", "$", "$$", "$$$" }));
+        cmbPriceRating.setToolTipText("Enter the Price Rating for the restaurant\nSelect \n$-- Cheap\n$$$ - Expensive");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -130,8 +131,6 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
                 btnUploadActionPerformed(evt);
             }
         });
-
-        lblLogo.setText("v");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -166,17 +165,17 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(271, 271, 271)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8)
+                            .addComponent(lblUsername)
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbPriceRating, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnUpload)
                                 .addGap(103, 103, 103)
-                                .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(362, 362, 362)
                         .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -211,7 +210,7 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
                     .addComponent(cmbPriceRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
+                    .addComponent(lblUsername)
                     .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -314,6 +313,8 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
         UserAccount userAccount = ecoSystem.getUserAccountDirectory().createUserAccount(userName, password, employee, new AdminRole());
 
         JOptionPane.showMessageDialog(null, "Restaurant is created Successfully!");
+        
+        
 
     }//GEN-LAST:event_btnCreateActionPerformed
     String getAbsolutePath;
@@ -344,12 +345,12 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblLogo;
+    private javax.swing.JLabel lblUsername;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtManagerName;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtPhoneNumber;
     private javax.swing.JTextField txtRestaurantName;
     private javax.swing.JTextField txtUsername;
