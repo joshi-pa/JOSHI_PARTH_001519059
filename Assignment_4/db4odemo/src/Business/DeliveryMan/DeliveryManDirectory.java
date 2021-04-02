@@ -26,8 +26,8 @@ public class DeliveryManDirectory {
         this.deliveryManDirectory = deliveryManDirectory;
     }
     
-    public DeliveryMan newDeliveryMan(String name, String address, String email, String phoneNumber, int age, String driverlicense) {
-        DeliveryMan deliveryMan = new DeliveryMan(name, address, email, phoneNumber, age, driverlicense);
+    public DeliveryMan newDeliveryMan(String name, String address, String email, String phoneNumber, int age) {
+        DeliveryMan deliveryMan = new DeliveryMan(name, address, email, phoneNumber, age);
         deliveryManDirectory.add(deliveryMan);
         return deliveryMan;
     }

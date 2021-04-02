@@ -304,8 +304,7 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
             }
         }
 
-        //Restaurant restaurant = restaurantDirectory.newRestaurant(restaurantName, address, managerName, phoneNumber);
-        //System.out.println(restaurant.getRestaurantName() + " + ");
+        
         System.out.println("Eco" + ecoSystem.getRestaurantDirectory().getRestaurantDirectory().size());
         ecoSystem.getRestaurantDirectory().newRestaurant(restaurantName, address, managerName, phoneNumber, restRating, restLogo);
         
@@ -313,6 +312,15 @@ public class CreateRestaurantJPanel extends javax.swing.JPanel {
         UserAccount userAccount = ecoSystem.getUserAccountDirectory().createUserAccount(userName, password, employee, new AdminRole());
 
         JOptionPane.showMessageDialog(null, "Restaurant is created Successfully!");
+        txtRestaurantName.setText("");
+        txtAddress.setText("");
+        txtManagerName.setText("");
+        txtUsername.setText("");
+        txtPassword.setText("");
+        txtPhoneNumber.setText("");
+        cmbPriceRating.setSelectedIndex(0);
+        lblLogo.setText("");
+        
         
         
 

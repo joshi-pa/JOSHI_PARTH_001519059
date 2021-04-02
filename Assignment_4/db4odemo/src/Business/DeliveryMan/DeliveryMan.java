@@ -17,13 +17,13 @@ public class DeliveryMan {
     private int age;
     private String driverlicense;
     
-    public DeliveryMan(String name, String address, String email, String phoneNumber, int age, String driverlicense) {
+    public DeliveryMan(String name, String address, String email, String phoneNumber, int age) {
         this.name = name;
         this.address = address;
         this.age = age;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.driverlicense = driverlicense;
+//        this.driverlicense = driverlicense;
     }
 
     public String getName() {
